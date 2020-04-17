@@ -1,4 +1,6 @@
-import currentUserSlice from "./currentUserSlice";
+import currentUserActions from './currentUserActions';
+import currentUserActionsTypes from './currentUserActionsTypes';
+import currentUserReducers from './currentUserReducers';
+import currentUserSelectors from './currentUserSelectors';
 
-// eslint-disable-next-line
-export { currentUserSlice };
+export {currentUserActions, currentUserActionsTypes, currentUserReducers, currentUserSelectors};

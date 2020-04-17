@@ -1,8 +1,6 @@
-import { combineReducers } from "@reduxjs/toolkit";
-import { currentUserSlice } from "../../datas/current-user";
+import {combineReducers} from 'redux';
+import {currentUserReducers} from '../../datas/current-user';
 
-const rootReducer = combineReducers({
-  [currentUserSlice.name]: currentUserSlice.reducer,
-});
+const rootReducer = combineReducers({currentUser: currentUserReducers});
 
 export default rootReducer;
