@@ -5,11 +5,12 @@
   "scripts": {
     "android": "react-native run-android",
     "ios": "react-native run-ios",
-    "start": "react-native start --reset-cache",
+    "start": "eval \"$(paste -s -d ' ' .env) react-native start --reset-cache\"",
     "lint": "eslint ."
   },
   "dependencies": {
     "@react-native-community/async-storage": "^1.9.0",
+    "lodash": "^4.17.15",
     "prop-types": "^15.7.2",
     "react": "16.11.0",
     "react-native": "0.62.2",
@@ -24,6 +25,7 @@
   "devDependencies": {
     "@babel/core": "^7.6.2",
     "@babel/runtime": "^7.6.2",
+    "babel-plugin-transform-inline-environment-variables": "^0.4.3",
     "eslint": "^6.8.0",
     "eslint-config-airbnb": "^18.1.0",
     "eslint-config-prettier": "^6.10.1",
