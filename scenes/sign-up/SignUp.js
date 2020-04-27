@@ -165,6 +165,12 @@ const SignUp = () => {
           Sign up now!
         </Text>
       </SignUpButton>
+      <Button to="/sign-in" centered>
+        <Text size={16} color="grey" underlined>
+          {/* eslint-disable-next-line */}
+          Already have an account?
+        </Text>
+      </Button>
     </SceneContainer>
   );
 };

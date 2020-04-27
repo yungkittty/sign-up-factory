@@ -7,6 +7,7 @@ import PublicRoute from './components/public-route';
 import Home from './scenes/home';
 import SignIn from './scenes/sign-in';
 import SignUp from './scenes/sign-up';
+import User from './scenes/user';
 import configureStore from './configurations/store';
 
 const {store, persistor} = configureStore();
@@ -26,6 +27,9 @@ const App = () => {
             <PublicRoute path="/sign-up">
               <SignUp />
             </PublicRoute>
+            <PrivateRoute path="/user">
+              <User />
+            </PrivateRoute>
           </Switch>
         </Router>
       </PersistGate>
