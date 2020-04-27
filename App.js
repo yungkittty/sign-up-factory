@@ -27,7 +27,7 @@ const App = () => {
             <PublicRoute path="/sign-up">
               <SignUp />
             </PublicRoute>
-            <PrivateRoute path="/user">
+            <PrivateRoute path="/users/:id">
               <User />
             </PrivateRoute>
           </Switch>
