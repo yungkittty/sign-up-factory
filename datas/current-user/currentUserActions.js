@@ -14,7 +14,7 @@ const currentUserActions = {
     payload: undefined,
     error,
   }), */
-  signOutRequest: (payload) => ({
+  signOut /* Request */: (payload) => ({
     type: currentUserActionsTypes.SIGN_OUT /* _REQUEST */,
     payload,
   }),

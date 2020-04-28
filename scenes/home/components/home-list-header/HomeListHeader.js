@@ -8,7 +8,7 @@ const HomeListHeader = () => (
       {/* eslint-disable-line */}
       Home
     </SceneTitle>
-    <SceneSubtitle>
+    <SceneSubtitle errored={false}>
       {/* eslint-disable-line */}
       ...
     </SceneSubtitle>

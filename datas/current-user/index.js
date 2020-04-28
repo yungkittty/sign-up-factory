@@ -5,6 +5,7 @@ import currentUserReducers from './currentUserReducers';
 import currentUserSelectors from './currentUserSelectors';
 
 export {
+  // eslint-disable-line
   currentUserActions,
   currentUserActionsTypes,
   currentUserApi,

@@ -4,7 +4,7 @@ import {Route, Redirect} from 'react-router-native';
 import useCurrentUser from '../../hooks/use-current-user';
 
 const PrivateRoute = ({children, ...others}) => {
-  const {currentUserId} = useCurrentUser();
+  const {id: currentUserId} = useCurrentUser();
   return (
     <Route
       // eslint-disable-next-line

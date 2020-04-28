@@ -1,38 +1,27 @@
 import React from 'react';
 import {FlatList} from 'react-native';
 import HomeListHeader from './components/home-list-header';
-import {usersApi} from '../../datas/users';
+import HomeListItem from './components/home-list-item';
+import useUsers from '../../hooks/use-users';
 
 /**
  * @todo:
  *  [] - use token as cookies.
  *  [] - use token as creds.
  *  [] - show user on home. (w/ user schema or network)
- *  [] - use id instead on hash.
+ *  [] - use id instead on hash as keyExtractor.
  *  [] - create loader for feedback. (sign-in, sign-up, home, ...)
  */
 
 const Home = () => {
-  const [users /* setUsers */] = React.useState([]);
-
-  React.useEffect(() => {
-    (async () => {
-      try {
-        await usersApi.getUsers();
-        // eslint-disable-next-line
-      } catch (error) {}
-    })();
-  }, []);
-
-  const renderListItem = () => null;
+  const users = useUsers();
 
   return (
     <FlatList
       // eslint-disable-line
       data={users}
-      keyExtractor={(user) => user.hash}
       ListHeaderComponent={HomeListHeader}
-      renderItem={renderListItem}
+      renderItem={HomeListItem}
       contentContainerStyle={{padding: 40}}
     />
   );
