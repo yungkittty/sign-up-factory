@@ -10,7 +10,7 @@ const HomeListHeader = () => (
     </SceneTitle>
     <SceneSubtitle errored={false}>
       {/* eslint-disable-line */}
-      ...
+      Stalk our users by pressing on them!
     </SceneSubtitle>
   </>
 );

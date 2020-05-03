@@ -8,7 +8,6 @@ import useUsers from '../../hooks/use-users';
  * @todo:
  *  [] - use token as cookies.
  *  [] - use token as creds.
- *  [] - show user on home. (w/ user schema or network)
  *  [] - use id instead on hash as keyExtractor.
  *  [] - create loader for feedback. (sign-in, sign-up, home, ...)
  */
