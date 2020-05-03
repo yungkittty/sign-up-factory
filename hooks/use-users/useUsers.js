@@ -8,7 +8,14 @@ const useUsers = () => {
   React.useEffect(() => {
     /* async  */ (() => {
       try {
-        const payload = [{}]; /* await usersApi.getUsers();  */
+        const payload = [
+          {
+            username: 'something_something',
+            hash: '',
+            firstName: 'something_something',
+            lastName: 'something_something',
+          },
+        ]; /* await usersApi.getUsers();  */
         dispatch(usersActions.getUsers(payload));
         // eslint-disable-next-line
       } catch (error) {}

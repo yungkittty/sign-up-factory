@@ -55,7 +55,7 @@ const SignIn = () => {
       }
       const {_id: id} = await apiSignInResponse.json();
       dispatch(currentUserActions.signIn({id}));
-      history.push('/home');
+      history.push('/');
       // eslint-disable-next-line
     } catch (error) {
       setUserError('Something went wrong! Please, retry!');
@@ -70,7 +70,7 @@ const SignIn = () => {
       </SceneTitle>
       <SceneSubtitle>
         {/* eslint-disable-line */}
-        Sign in our application by filling these fields!
+        Sign in for our application by filling these fields!
       </SceneSubtitle>
       <SceneError>
         {/* eslint-disable-line */}

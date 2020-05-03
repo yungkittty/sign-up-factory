@@ -108,7 +108,7 @@ const SignUp = () => {
       }
       const {_id: id} = await apiSignInResponse.json();
       dispatch(currentUserActions.signIn({id}));
-      history.push('/home');
+      history.push('/');
       // eslint-disable-next-line
     } catch (error) {
       setUserError('Something went wrong! Please, retry!');
