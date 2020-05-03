@@ -33,12 +33,16 @@ jobs:
         - npm install -g @react-native-community/cli
       before_script:
         - echo fs.inotify.max_user_watches=582222 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
-        - npm run build-android || travis_terminate 1
+        - npm run bundle-android || travis_terminate 1
       script:
         - cd android
         - bash ../.travis/build-android.sh || travis_terminate 1
-        - bash ../.travis/deploy-android.sh || travis_terminate 1
-        - cd ..
+        - bash zip -q -r app-symbols.zip app/build/intermediates/symbols/release/R.txt
+      deploy:
+        provider: testfairy
+        api-key: 10b9285086851e5d64d98c27b229e5f13f56460b
+        app-file: app/build/outputs/apk/release/app-release.apk
+        symbols-file: app/app-symbols.zip
     - stage: iOS
       os: osx
       osx_image: xcode11
@@ -48,7 +52,7 @@ jobs:
       install:
         - npm install -g @react-native-community/cli
       before_script:
-        - npm run build-ios || travis_terminate 1
+        - npm run bundle-ios || travis_terminate 1
       script:
         - cd ios
         - bash ../.travis/build-ios.sh || travis_terminate 1
