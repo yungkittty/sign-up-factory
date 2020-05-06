@@ -37,12 +37,12 @@ jobs:
       script:
         - cd android
         - bash ../.travis/build-android.sh || travis_terminate 1
-        - bash zip -q -r app-symbols.zip app/build/intermediates/symbols/release/R.txt
+        - cd ..
       deploy:
         provider: testfairy
         api-key: 10b9285086851e5d64d98c27b229e5f13f56460b
-        app-file: app/build/outputs/apk/release/app-release.apk
-        symbols-file: app/app-symbols.zip
+        app-file: android/app/build/outputs/apk/release/app-release.apk
+        symbols-file: android/app/app-symbols.zip
     - stage: iOS
       os: osx
       osx_image: xcode11
