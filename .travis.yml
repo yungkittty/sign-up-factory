@@ -44,7 +44,7 @@ jobs:
         provider: testfairy
         api-key: 10b9285086851e5d64d98c27b229e5f13f56460b
         app-file: android/app/build/outputs/apk/release/app-release.apk
-        symbols-file: android/app/app-symbols.zip
+        symbols-file: android/app-symbols.zip
         skip_cleanup: true
     - stage: iOS
       os: osx
