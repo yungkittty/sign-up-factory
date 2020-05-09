@@ -49,16 +49,17 @@ const SignIn = () => {
         username,
         password: userPassword,
       });
-      if (apiSignInResponse.status !== 200) {
-        setUserError('Something went wrong! Please, retry!');
-        return;
-      }
       const {_id: id} = apiSignInResponse.data;
       dispatch(currentUserActions.signIn({id}));
       history.push('/');
-      // eslint-disable-next-line
-    } catch (error) {
-      setUserError('Something went wrong! Please, retry!');
+    } catch (apiSignInError) {
+      const apiSignInErrorMessage =
+        (((apiSignInError || {}).response || {}).data || {}).message || '';
+      if (apiSignInErrorMessage) {
+        setUserError(apiSignInErrorMessage);
+      } else {
+        setUserError('Something went wrong! Please, retry!');
+      }
     }
   };
 

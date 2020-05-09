@@ -88,30 +88,27 @@ const SignUp = () => {
     setUserError('');
 
     try {
-      const apiSignUpResponse = await currentUserApi.signUp({
+      await currentUserApi.signUp({
         firstName: userFirstName,
         lastName: userLastName,
         username,
         password: userPassword,
       });
-      if (apiSignUpResponse.status !== 200) {
-        setUserError('Username is already taken!');
-        return;
-      }
       const apiSignInResponse = await currentUserApi.signIn({
         username,
         password: userPassword,
       });
-      if (apiSignInResponse.status !== 200) {
-        setUserError('Something went wrong! Please, retry!');
-        return;
-      }
       const {_id: id} = apiSignInResponse.data;
       dispatch(currentUserActions.signIn({id}));
       history.push('/');
-      // eslint-disable-next-line
-    } catch (error) {
-      setUserError('Something went wrong! Please, retry!');
+    } catch (apiSignInError) {
+      const apiSignInErrorMessage =
+        (((apiSignInError || {}).response || {}).data || {}).message || '';
+      if (apiSignInErrorMessage) {
+        setUserError(apiSignInErrorMessage);
+      } else {
+        setUserError('Something went wrong! Please, retry!');
+      }
     }
   };
 
