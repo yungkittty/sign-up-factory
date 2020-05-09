@@ -33,7 +33,7 @@ jobs:
         - npm install -g @react-native-community/cli
       before_script:
         - echo fs.inotify.max_user_watches=582222 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
-        - npm run build-android || travis_terminate 1
+        - npm run bundle-android || travis_terminate 1
       script:
         - cd android
         - bash ../.travis/build-android.sh || travis_terminate 1
@@ -48,7 +48,7 @@ jobs:
       install:
         - npm install -g @react-native-community/cli
       before_script:
-        - npm run build-ios || travis_terminate 1
+        - npm run bundle-ios || travis_terminate 1
       script:
         - cd ios
         - bash ../.travis/build-ios.sh || travis_terminate 1

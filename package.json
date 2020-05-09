@@ -5,8 +5,8 @@
   "scripts": {
     "android": "react-native run-android",
     "ios": "react-native run-ios",
-    "build-android": "eval \"$(paste -s -d ' ' .env) react-native bundle --platform android --dev false --bundle-output android/app/src/main/assets/index.android.bundle\"",
-    "build-ios": "eval \"$(paste -s -d ' ' .env) react-native bundle --platform ios --dev false --bundle-output ios/curb/main.jsbundle\"",
+    "bundle-android": "eval \"$(paste -s -d ' ' .env) react-native bundle --platform android --dev false --bundle-output android/app/src/main/assets/index.android.bundle --entry-file index.js\"",
+    "bundle-ios": "eval \"$(paste -s -d ' ' .env) react-native bundle --platform ios --dev false --bundle-output ios/SignUpFactory/main.jsbundle --entry-file index.js\"",
     "start": "eval \"$(paste -s -d ' ' .env) react-native start --reset-cache\"",
     "lint": "eslint ."
   },
