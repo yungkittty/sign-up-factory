@@ -1,12 +1,7 @@
+import axios from 'axios';
+
 const usersApi = {
-  getUsers: async () =>
-    // eslint-disable-next-line
-    fetch(`${process.env.API_URL}/users/`, {
-      method: 'GET',
-      headers: {
-        Accept: 'application/json',
-      },
-    }),
+  getUsers: async () => axios.get('/users/'),
 };
 
 export default usersApi;

@@ -9,8 +9,11 @@ import SignIn from './scenes/sign-in';
 import SignUp from './scenes/sign-up';
 import User from './scenes/user';
 import configureStore from './configurations/store';
+import configureAxios from './configurations/axios';
 
 const {store, persistor} = configureStore();
+
+configureAxios();
 
 const App = () => {
   return (
