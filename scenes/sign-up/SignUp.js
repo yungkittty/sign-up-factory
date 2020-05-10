@@ -94,18 +94,17 @@ const SignUp = () => {
         username,
         password: userPassword,
       });
-      const apiSignInResponse = await currentUserApi.signIn({
+      const response = await currentUserApi.signIn({
         username,
         password: userPassword,
       });
-      const {_id: id} = apiSignInResponse.data;
+      const {_id: id} = response.data;
       dispatch(currentUserActions.signIn({id}));
       history.push('/');
-    } catch (apiSignInError) {
-      const apiSignInErrorMessage =
-        (((apiSignInError || {}).response || {}).data || {}).message || '';
-      if (apiSignInErrorMessage) {
-        setUserError(apiSignInErrorMessage);
+    } catch (error) {
+      const errorMessage = (((error || {}).response || {}).data || {}).message || '';
+      if (errorMessage) {
+        setUserError(errorMessage);
       } else {
         setUserError('Something went wrong! Please, retry!');
       }

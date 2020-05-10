@@ -4,14 +4,6 @@ import HomeListHeader from './components/home-list-header';
 import HomeListItem from './components/home-list-item';
 import useUsers from '../../hooks/use-users';
 
-/**
- * @todo:
- *  [] - use token as cookies.
- *  [] - use token as creds.
- *  [] - use id instead on hash as keyExtractor.
- *  [] - create loader for feedback. (sign-in, sign-up, home, ...)
- */
-
 const Home = () => {
   const users = useUsers();
 
@@ -19,6 +11,7 @@ const Home = () => {
     <FlatList
       // eslint-disable-line
       data={users}
+      keyExtractor={(user) => user.id}
       ListHeaderComponent={HomeListHeader}
       renderItem={HomeListItem}
       contentContainerStyle={{padding: 40}}

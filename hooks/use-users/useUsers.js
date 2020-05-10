@@ -1,22 +1,14 @@
 import React from 'react';
 import {useDispatch, useSelector, shallowEqual} from 'react-redux';
-import {usersActions, /* usersApi, */ usersSelectors} from '../../datas/users';
+import {usersActions, usersApi, usersSelectors} from '../../datas/users';
 
 const useUsers = () => {
   const dispatch = useDispatch();
 
   React.useEffect(() => {
-    /* async  */ (() => {
+    (async () => {
       try {
-        const payload = [
-          {
-            username: 'something_something',
-            hash: '',
-            firstName: 'something_something',
-            lastName: 'something_something',
-          },
-        ]; /* await usersApi.getUsers();  */
-        dispatch(usersActions.getUsers(payload));
+        dispatch(usersActions.getUsers((await usersApi.getUsers()).data));
         // eslint-disable-next-line
       } catch (error) {}
     })();

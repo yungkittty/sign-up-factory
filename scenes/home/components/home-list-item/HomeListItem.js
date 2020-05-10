@@ -9,6 +9,7 @@ const ItemContainer = styled(Button)`
   flex-direction: row;
   justify-content: flex-start;
   padding: 15px;
+  margin-bottom: 20px;
   background-color: gray;
 `;
 
@@ -47,10 +48,11 @@ const HomeListItem = ({item}) => {
     id: userId,
     firstName: userFirstName,
     lastName: userLastName,
+    avatarData: userAvatarData = '',
   } = item;
   return (
     <ItemContainer to={`/users/${userId}`} size={70} centered>
-      <ItemImage />
+      <ItemImage source={userAvatarData} />
       <InfoContainer>
         <InfoTitle>
           {/* eslint-disable-line */}
@@ -66,9 +68,11 @@ const HomeListItem = ({item}) => {
 };
 
 HomeListItem.propTypes = {
-  item: PropTypes.oneOfType({
+  item: PropTypes.shape({
+    id: PropTypes.string.isRequired,
     firstName: PropTypes.string.isRequired,
     lastName: PropTypes.string.isRequired,
+    avatarData: PropTypes.string,
   }).isRequired,
 };
 
