@@ -33,6 +33,7 @@ const Button = styled(({to, ...others}) =>
       height: ${size}px;
     `;
   }}
+  border-radius: 6px;
 `;
 
 Button.defaultProps = {

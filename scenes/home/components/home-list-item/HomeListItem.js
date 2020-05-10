@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components/native';
 import Button from '../../../../components/button';
 import Text from '../../../../components/text';
+import UserImage from '../../../../components/user-image';
 
 const ItemContainer = styled(Button)`
   display: flex;
@@ -10,14 +11,7 @@ const ItemContainer = styled(Button)`
   justify-content: flex-start;
   padding: 15px;
   margin-bottom: 20px;
-  background-color: gray;
-`;
-
-const ItemImage = styled.Image`
-  width: 40px;
-  height: 40px;
-  border-radius: 20px;
-  background-color: white;
+  background-color: #9e9e9e;
 `;
 
 const InfoContainer = styled.View`
@@ -52,7 +46,7 @@ const HomeListItem = ({item}) => {
   } = item;
   return (
     <ItemContainer to={`/users/${userId}`} size={70} centered>
-      <ItemImage source={userAvatarData} />
+      <UserImage source={{uri: userAvatarData}} />
       <InfoContainer>
         <InfoTitle>
           {/* eslint-disable-line */}
