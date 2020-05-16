@@ -2,7 +2,7 @@ import _ from 'lodash';
 import React, {useState, useCallback} from 'react';
 import {useDispatch} from 'react-redux';
 import styled from 'styled-components';
-import {useParams} from 'react-router-native';
+import {useParams, useHistory} from 'react-router-native';
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
 import {faCamera} from '@fortawesome/free-solid-svg-icons';
 // import PropTypes from "prop-types";
@@ -17,7 +17,7 @@ import Button from '../../components/button';
 import Text from '../../components/text';
 import UserImage from '../../components/user-image';
 import {usersActions} from '../../datas/users';
-import {currentUserApi} from '../../datas/current-user';
+import {currentUserApi, currentUserActions} from '../../datas/current-user';
 
 const ImportPhotoButton = styled(Button)`
   width: 100%;
@@ -40,6 +40,7 @@ const DisconnectButton = styled(Button)`
 
 const User = () => {
   const dispatch = useDispatch();
+  const history = useHistory();
   const params = useParams();
   const user = useUser(params.id);
   const {id: currentUserId} = useCurrentUser();
@@ -102,6 +103,16 @@ const User = () => {
     lastName,
   ]);
 
+  const logout = useCallback(async () => {
+    try {
+      await currentUserApi.logout();
+      dispatch(currentUserActions.signOut());
+      history.push('/sign-in');
+    } catch (error) {
+      console.log(error);
+    }
+  }, [dispatch, history]);
+
   return (
     <SceneContainer>
       <SceneTitle>{`${user.firstName} ${user.lastName}`}</SceneTitle>
@@ -136,7 +147,7 @@ const User = () => {
               {saveMessage}
             </Text>
           </SaveButton>
-          <DisconnectButton onPress={() => console.log('disconnect')} centered>
+          <DisconnectButton onPress={logout} centered>
             <Text size={18} weight={700} color="white">
               Disconnect
             </Text>
