@@ -14,6 +14,10 @@ const usersActions = {
     payload: undefined,
     error,
   }), */
+  getUser /* Request */: (payload) => ({
+    type: usersActionsTypes.GET_USER /* _REQUEST */,
+    payload,
+  }),
 };
 
 export default usersActions;

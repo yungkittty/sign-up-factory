@@ -1,9 +1,12 @@
-import React, {useState} from 'react';
+import _ from 'lodash';
+import React, {useState, useCallback} from 'react';
+import {useDispatch} from 'react-redux';
 import styled from 'styled-components';
 import {useParams} from 'react-router-native';
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
 import {faCamera} from '@fortawesome/free-solid-svg-icons';
 // import PropTypes from "prop-types";
+import importPhotoPress from './utils/import-photo-press';
 import SceneContainer from '../../components/scene-container';
 import SceneTitle from '../../components/scene-title';
 import SceneSubtitle from '../../components/scene-subtitle';
@@ -13,6 +16,8 @@ import Input from '../../components/input';
 import Button from '../../components/button';
 import Text from '../../components/text';
 import UserImage from '../../components/user-image';
+import {usersActions} from '../../datas/users';
+import {currentUserApi} from '../../datas/current-user';
 
 const ImportPhotoButton = styled(Button)`
   width: 100%;
@@ -34,15 +39,68 @@ const DisconnectButton = styled(Button)`
 `;
 
 const User = () => {
+  const dispatch = useDispatch();
   const params = useParams();
   const user = useUser(params.id);
   const {id: currentUserId} = useCurrentUser();
   const isCurrentUser = user.id === currentUserId;
 
+  const [avatarData, setAvatarData] = useState({uri: user.avatarData, file: undefined});
   const [firstName, setFirstName] = useState(user.firstName);
   const [lastName, setLastName] = useState(user.lastName);
 
-  const isPropsHaveChanges = firstName !== user.firstName || lastName !== user.lastName;
+  const initialSaveMessage = 'Save';
+
+  const [saveMessage, setSaveMessage] = useState(initialSaveMessage);
+
+  const isPropsHaveChanges =
+    (avatarData.uri !== user.avatarData ||
+      firstName !== user.firstName ||
+      lastName !== user.lastName) &&
+    saveMessage === initialSaveMessage;
+
+  const importPhoto = useCallback(() => {
+    importPhotoPress((uri, file) => {
+      setAvatarData({uri, file});
+    });
+  }, []);
+
+  const patchUser = useCallback(async () => {
+    try {
+      setSaveMessage('...');
+      const patchOptions = {
+        userId: currentUserId,
+        ...(firstName !== user.firstName && {firstName}),
+        ...(lastName !== user.lastName && {lastName}),
+      };
+      if (_.size(patchOptions) > 0) await currentUserApi.patch(patchOptions);
+      if (avatarData.file) {
+        await currentUserApi.uploadAvatar({avatarData});
+      }
+      dispatch(
+        usersActions.getUser({
+          ...patchOptions,
+          ...(avatarData.file && {avatarData: avatarData.uri}),
+        }),
+      );
+      setSaveMessage('Updated');
+    } catch (error) {
+      setAvatarData({uri: user.avatarData, file: undefined});
+      setFirstName(user.firstName);
+      setLastName(user.lastName);
+      setSaveMessage('Error');
+    }
+    setTimeout(() => setSaveMessage(initialSaveMessage), 2000);
+  }, [
+    dispatch,
+    currentUserId,
+    user.avatarData,
+    user.firstName,
+    user.lastName,
+    avatarData,
+    firstName,
+    lastName,
+  ]);
 
   return (
     <SceneContainer>
@@ -50,12 +108,12 @@ const User = () => {
       <SceneSubtitle>{user.username}</SceneSubtitle>
       <UserImage
         size="large"
-        source={{uri: user.avatarData}}
+        source={{uri: avatarData.uri}}
         style={{alignSelf: 'center', marginTop: 20, marginBottom: 20}}
       />
       {isCurrentUser && (
         <>
-          <ImportPhotoButton onPress={() => console.log('patch')} centered>
+          <ImportPhotoButton onPress={importPhoto} centered>
             <FontAwesomeIcon
               icon={faCamera}
               color="white"
@@ -73,9 +131,9 @@ const User = () => {
             onChangeText={setLastName}
             style={{marginTop: 10}}
           />
-          <SaveButton onPress={() => console.log('patch')} disabled={!isPropsHaveChanges} centered>
+          <SaveButton onPress={patchUser} disabled={!isPropsHaveChanges} centered>
             <Text size={18} weight={700} color="white">
-              Save
+              {saveMessage}
             </Text>
           </SaveButton>
           <DisconnectButton onPress={() => console.log('disconnect')} centered>
