@@ -5,7 +5,6 @@ const Text = styled.Text`
   ${(props) => {
     const {size, weight, color, underlined} = props;
     return `
-      font-family: open-sans;
       font-size: ${size}px;
       font-weight: ${weight};
       color: ${color};

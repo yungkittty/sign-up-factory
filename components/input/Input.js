@@ -1,7 +1,6 @@
 import styled from 'styled-components/native';
 
 const Input = styled.TextInput`
-  font-family: open-sans;
   font-size: 14px;
   height: 60px;
   padding: 20px;
