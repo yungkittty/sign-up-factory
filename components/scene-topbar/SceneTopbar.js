@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import {Platform} from 'react-native';
 import styled from 'styled-components/native';
 import TopbarActionButton from './topbar-action-button/TopbarActionButton';
+import {windowDimensions} from '../../configurations/window';
 
 const SceneTopbarContainer = styled.View`
   position: absolute;
@@ -10,7 +11,8 @@ const SceneTopbarContainer = styled.View`
   left: 0px;
   display: flex;
   flex-direction: column;
-  height: 60px;
+  padding-top: ${windowDimensions.getStatusBarHeight()}px;
+  height: ${windowDimensions.getTopbarHeight()}px;
   width: 100%;
   background: #ecf0f1;
   ${Platform.OS === 'android'
@@ -25,28 +27,26 @@ const SceneTopbarContainer = styled.View`
 `}
 `;
 
-const SceneTopbar = ({actions}) => {
-  return (
-    <SceneTopbarContainer>
-      {/* eslint-disable-next-line */}
-      {actions.left && <TopbarActionButton left {...actions.left} />}
-      {/* eslint-disable-next-line */}
-      {actions.right && <TopbarActionButton right {...actions.right} />}
-    </SceneTopbarContainer>
-  );
-};
+const SceneTopbar = ({actions}) => (
+  <SceneTopbarContainer>
+    {/* eslint-disable-next-line */}
+    {actions.left && <TopbarActionButton left {...actions.left} />}
+    {/* eslint-disable-next-line */}
+    {actions.right && <TopbarActionButton right {...actions.right} />}
+  </SceneTopbarContainer>
+);
 
 SceneTopbar.propTypes = {
   actions: PropTypes.shape({
     left: PropTypes.shape({
       icon: PropTypes.object,
       image: PropTypes.string,
-      onClick: PropTypes.func.isRequired,
+      onPress: PropTypes.func.isRequired,
     }),
     right: PropTypes.shape({
       icon: PropTypes.object,
       image: PropTypes.string,
-      onClick: PropTypes.func.isRequired,
+      onPress: PropTypes.func.isRequired,
     }),
   }).isRequired,
 };

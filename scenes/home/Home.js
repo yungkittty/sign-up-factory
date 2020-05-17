@@ -9,6 +9,7 @@ import HomeListItem from './components/home-list-item';
 import useUsers from '../../hooks/use-users';
 import useCurrentUser from '../../hooks/use-current-user';
 import {currentUserApi, currentUserActions} from '../../datas/current-user';
+import {windowDimensions} from '../../configurations/window';
 
 const Home = () => {
   const history = useHistory();
@@ -42,7 +43,7 @@ const Home = () => {
         keyExtractor={(user) => user.id}
         ListHeaderComponent={HomeListHeader}
         renderItem={HomeListItem}
-        style={{marginTop: 60}}
+        style={{marginTop: windowDimensions.getTopbarHeight()}}
         contentContainerStyle={{padding: 40}}
       />
     </>
