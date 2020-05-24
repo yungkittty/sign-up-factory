@@ -10,6 +10,7 @@ const TopbarActionButtonContainer = styled(Button)`
   height: 60px;
   justify-content: center;
   align-items: center;
+  bottom: 0px;
   ${({left}) => (left ? 'left' : 'right')}: 0px;
   position: absolute;
 `;

@@ -11,7 +11,6 @@ const SceneTopbarContainer = styled.View`
   left: 0px;
   display: flex;
   flex-direction: column;
-  padding-top: ${windowDimensions.getStatusBarHeight()}px;
   height: ${windowDimensions.getTopbarHeight()}px;
   width: 100%;
   background: #ecf0f1;
