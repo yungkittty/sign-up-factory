@@ -22,9 +22,8 @@ const importPhotoPress = async (isCamera, onSelect) => {
         name: `image.${type}`,
       });
     }
-  } catch (e) {
-    console.log(e);
-  }
+    // eslint-disable-next-line
+  } catch (e) {}
 };
 
 export default importPhotoPress;

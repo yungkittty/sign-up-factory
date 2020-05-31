@@ -122,7 +122,8 @@ const User = () => {
             <ImportPhotoButton
               style={{backgroundColor: isAvatarButtonSelected ? 'transparent' : '#03a9f4'}}
               onPress={() => setIsAvatarButtonSelected(!isAvatarButtonSelected)}
-              centered>
+              centered
+            >
               {!isAvatarButtonSelected ? (
                 <>
                   <FontAwesomeIcon
@@ -143,7 +144,8 @@ const User = () => {
                       backgroundColor: '#95a5a6',
                       borderTopRightRadius: 0,
                       borderBottomRightRadius: 0,
-                    }}>
+                    }}
+                  >
                     <FontAwesomeIcon icon={faCamera} color="white" size={20} />
                     <Text size={14} weight={700} color="white">
                       From camera
@@ -155,7 +157,8 @@ const User = () => {
                       backgroundColor: '#34495e',
                       borderTopLeftRadius: 0,
                       borderBottomLeftRadius: 0,
-                    }}>
+                    }}
+                  >
                     <FontAwesomeIcon icon={faImage} color="white" size={20} />
                     <Text size={14} weight={700} color="white">
                       From gallery
