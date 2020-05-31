@@ -6,7 +6,7 @@ const currentUserApi = {
   logout: async () => axios.post('/users/logout'),
   patch: async ({userId, ...others}) => axios.put(`/users/${userId}`, others),
   uploadAvatar: async ({avatarData}) => {
-    const data = new FormData();
+    const data = new FormData(); // eslint-disable-line
     data.append('avatar', avatarData.file);
     return axios.post('/users/avatar', data);
   },

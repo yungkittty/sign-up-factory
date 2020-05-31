@@ -1,7 +1,7 @@
-import {Dimensions, Platform} from 'react-native';
+import {Dimensions, Platform, StatusBar} from 'react-native';
 import {isIphoneX} from 'react-native-device-detection';
 
-const statusBarHeight = Platform.OS === 'android' ? 0 : isIphoneX ? 30 : 20; // eslint-disable-line
+const statusBarHeight = Platform.OS === 'android' ? StatusBar.currentHeight : isIphoneX ? 30 : 20; // eslint-disable-line
 
 const windowDimensions = {
   getWidth: () => Dimensions.get('window').width,

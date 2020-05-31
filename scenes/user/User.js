@@ -4,8 +4,7 @@ import {useDispatch} from 'react-redux';
 import styled from 'styled-components';
 import {useParams, useHistory} from 'react-router-native';
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
-import {faCamera, faArrowLeft} from '@fortawesome/free-solid-svg-icons';
-// import PropTypes from "prop-types";
+import {faCamera, faArrowLeft, faImage} from '@fortawesome/free-solid-svg-icons';
 import importPhotoPress from './utils/import-photo-press';
 import SceneTopbar from '../../components/scene-topbar';
 import SceneContainer from '../../components/scene-container';
@@ -23,7 +22,13 @@ import {currentUserApi} from '../../datas/current-user';
 const ImportPhotoButton = styled(Button)`
   width: 100%;
   margin-bottom: 50px;
-  background-color: #03a9f4;
+  flex-flow: row;
+`;
+
+const SubImportPhotoButton = styled(Button)`
+  flex: 1;
+  align-items: center;
+  justify-content: center;
 `;
 
 const SaveButton = styled(Button)`
@@ -45,6 +50,8 @@ const User = () => {
   const [firstName, setFirstName] = useState(user.firstName);
   const [lastName, setLastName] = useState(user.lastName);
 
+  const [isAvatarButtonSelected, setIsAvatarButtonSelected] = useState(false);
+
   const initialSaveMessage = 'Save';
 
   const [saveMessage, setSaveMessage] = useState(initialSaveMessage);
@@ -55,8 +62,9 @@ const User = () => {
       lastName !== user.lastName) &&
     saveMessage === initialSaveMessage;
 
-  const importPhoto = useCallback(() => {
-    importPhotoPress((uri, file) => {
+  const importPhoto = useCallback((isCamera) => {
+    importPhotoPress(isCamera, (uri, file) => {
+      setIsAvatarButtonSelected(false);
       setAvatarData({uri, file});
     });
   }, []);
@@ -111,16 +119,53 @@ const User = () => {
         />
         {isCurrentUser && (
           <>
-            <ImportPhotoButton onPress={importPhoto} centered>
-              <FontAwesomeIcon
-                icon={faCamera}
-                color="white"
-                style={{position: 'absolute', left: 30}}
-                size={20}
-              />
-              <Text size={18} weight={700} color="white">
-                Choose a picture
-              </Text>
+            <ImportPhotoButton
+              style={{backgroundColor: isAvatarButtonSelected ? 'transparent' : '#03a9f4'}}
+              onPress={() => setIsAvatarButtonSelected(!isAvatarButtonSelected)}
+              centered
+            >
+              {!isAvatarButtonSelected ? (
+                <>
+                  <FontAwesomeIcon
+                    icon={faCamera}
+                    color="white"
+                    style={{position: 'absolute', left: 30}}
+                    size={20}
+                  />
+                  <Text size={18} weight={700} color="white">
+                    Choose a picture
+                  </Text>
+                </>
+              ) : (
+                <>
+                  <SubImportPhotoButton
+                    onPress={() => importPhoto(true)}
+                    style={{
+                      backgroundColor: '#95a5a6',
+                      borderTopRightRadius: 0,
+                      borderBottomRightRadius: 0,
+                    }}
+                  >
+                    <FontAwesomeIcon icon={faCamera} color="white" size={20} />
+                    <Text size={14} weight={700} color="white">
+                      From camera
+                    </Text>
+                  </SubImportPhotoButton>
+                  <SubImportPhotoButton
+                    onPress={() => importPhoto(false)}
+                    style={{
+                      backgroundColor: '#34495e',
+                      borderTopLeftRadius: 0,
+                      borderBottomLeftRadius: 0,
+                    }}
+                  >
+                    <FontAwesomeIcon icon={faImage} color="white" size={20} />
+                    <Text size={14} weight={700} color="white">
+                      From gallery
+                    </Text>
+                  </SubImportPhotoButton>
+                </>
+              )}
             </ImportPhotoButton>
             <Input placeholder="First name" value={firstName} onChangeText={setFirstName} />
             <Input
@@ -140,7 +185,5 @@ const User = () => {
     </>
   );
 };
-
-// User.propTypes = {};
 
 export default User;

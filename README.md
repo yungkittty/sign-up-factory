@@ -44,7 +44,7 @@ Finaly, start the build in another terminal using :
 
 - For Android devices :
 
-` npm run android`
+`npm run android`
 
 It should work !
 

@@ -15,29 +15,27 @@ const {store, persistor} = configureStore();
 
 configureAxios();
 
-const App = () => {
-  return (
-    <Provider store={store}>
-      <PersistGate loading={null} persistor={persistor}>
-        <Router>
-          <Switch>
-            <PrivateRoute exact path="/">
-              <Home />
-            </PrivateRoute>
-            <PublicRoute path="/sign-in">
-              <SignIn />
-            </PublicRoute>
-            <PublicRoute path="/sign-up">
-              <SignUp />
-            </PublicRoute>
-            <PrivateRoute path="/users/:id">
-              <User />
-            </PrivateRoute>
-          </Switch>
-        </Router>
-      </PersistGate>
-    </Provider>
-  );
-};
+const App = () => (
+  <Provider store={store}>
+    <PersistGate loading={null} persistor={persistor}>
+      <Router>
+        <Switch>
+          <PrivateRoute exact path="/">
+            <Home />
+          </PrivateRoute>
+          <PublicRoute path="/sign-in">
+            <SignIn />
+          </PublicRoute>
+          <PublicRoute path="/sign-up">
+            <SignUp />
+          </PublicRoute>
+          <PrivateRoute path="/users/:id">
+            <User />
+          </PrivateRoute>
+        </Switch>
+      </Router>
+    </PersistGate>
+  </Provider>
+);
 
 export default App;

@@ -24,9 +24,8 @@ const Home = () => {
       await currentUserApi.logout();
       dispatch(currentUserActions.signOut());
       history.push('/sign-in');
-    } catch (error) {
-      console.log(error);
-    }
+      // eslint-disable-next-line
+    } catch (error) {}
   }, [dispatch, history]);
 
   return (

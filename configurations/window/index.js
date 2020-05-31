@@ -1,3 +1,3 @@
 import windowDimensions from './window-dimensions';
 
-export {windowDimensions};
+export {windowDimensions}; // eslint-disable-line

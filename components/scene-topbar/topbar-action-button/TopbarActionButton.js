@@ -31,7 +31,7 @@ TopbarActionButton.defaultProps = {
 TopbarActionButton.propTypes = {
   icon: PropTypes.object, // eslint-disable-line
   image: PropTypes.string,
-  onClick: PropTypes.func.isRequired,
+  onPress: PropTypes.func.isRequired,
 };
 
 export default TopbarActionButton;
