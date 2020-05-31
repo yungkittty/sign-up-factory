@@ -2,7 +2,10 @@
   "expo": {
     "name": "SignUpFactory",
     "slug": "SignUpFactory",
-    "platforms": ["ios", "android"],
+    "platforms": [
+      "ios",
+      "android"
+    ],
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -14,9 +17,13 @@
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": ["**/*"],
+    "assetBundlePatterns": [
+      "**/*"
+    ],
     "ios": {
       "supportsTablet": true
-    }
+    },
+    "description": "SignUpFactory is an application where you can register and see the profile of other registered members.\n\nIt also allows you to enrich your profile with a photo to make other members jealous!",
+    "githubUrl": "https://github.com/yungkittty/sign-up-factory"
   }
 }
