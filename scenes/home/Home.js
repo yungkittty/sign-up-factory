@@ -6,18 +6,20 @@ import {faPowerOff} from '@fortawesome/free-solid-svg-icons';
 import SceneTopbar from '../../components/scene-topbar';
 import HomeListHeader from './components/home-list-header';
 import HomeListItem from './components/home-list-item';
-import useUsers from '../../hooks/use-users';
 import useCurrentUser from '../../hooks/use-current-user';
+import useUsers from '../../hooks/use-users';
+import useUser from '../../hooks/use-user';
 import {currentUserApi, currentUserActions} from '../../datas/current-user';
 import {windowDimensions} from '../../configurations/window';
 
 const Home = () => {
   const history = useHistory();
   const dispatch = useDispatch();
-  const users = useUsers();
   const {id} = useCurrentUser();
+  const users = useUsers();
+  const user = useUser(id);
 
-  const currentUserAvatarData = (users.find((user) => user.id === id) || {}).avatarData;
+  const currentUserAvatarData = user.avatarData;
 
   const logout = useCallback(async () => {
     try {
@@ -39,7 +41,7 @@ const Home = () => {
       <FlatList
         // eslint-disable-line
         data={users}
-        keyExtractor={(user) => user.id}
+        keyExtractor={(item) => item.id}
         ListHeaderComponent={HomeListHeader}
         renderItem={HomeListItem}
         style={{marginTop: windowDimensions.getTopbarHeight()}}
