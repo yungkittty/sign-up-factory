@@ -14,7 +14,7 @@ To do this, simply follow the instructions here :
 
 https://reactnative.dev/docs/environment-setup.
 
-Make sure to follow all the instructions using the React Native CLI, not Expo.
+Make sure to follow all the instructions using Expo, not React Native CLI.
 
 For Node, I recommend to use NVM if possible, because it's more flexible, as described here :
 
@@ -26,17 +26,7 @@ Install the npm packages using :
 
 `npm install`
 
-Then, start the local server in a terminal using :
-
-- For Windows developers :
-
-`npm run start-windows`
-
-- For others developers :
-
-`npm run start`
-
-Finaly, start the build in another terminal using :
+Finaly, start the build using :
 
 - For iOS devices :
 
@@ -46,12 +36,12 @@ Finaly, start the build in another terminal using :
 
 `npm run android`
 
-It should work !
+Additional installation may be required if you didn't have Expo yet.
+
+Well played, it should work now !
 
 ## How to deploy it ?
 
-The code is automatically deployed, using Travis CI, as soon as it is commited to "develop".
+To deploy, just use the expo publishing feature. Make sure to use it only on "develop" with a tested code.
 
-In practice, it is advised to develop a feature in a separate branch and to do a "pull-request".
-
-Once this "pull-request" is tested and validated, it must be merged to the "develop" branch to trigger the deployment.
+The iOS and Android applications are available [here](https://expo.io/@yungkittty/SignUpFactory).
