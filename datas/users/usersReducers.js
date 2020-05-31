@@ -9,8 +9,8 @@ const usersReducers = (state = [], action) => {
     case usersActionsTypes.GET_USER /* _SUCCESS */: {
       const index = _.findIndex(state, {_id: action.payload.userId});
       if (index === -1) return state;
-      state.splice(index, 1, {...state[index], ...action.payload});
-      return JSON.parse(JSON.stringify(state)); // This is a hacky way to keep state not mutated.
+      const newUser = {...state[index], ...action.payload};
+      return [...state.slice(0, index), newUser, ...state.slice(index + 1, state.length)];
     }
     default: {
       return state;
