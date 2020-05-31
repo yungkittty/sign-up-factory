@@ -27,6 +27,7 @@ const SignUp = () => {
   const dispatch = useDispatch();
   const history = useHistory();
 
+  const [isLoading, setIsLoading] = React.useState(false);
   const [userFirstName, setUserFirstName] = React.useState('');
   const [userLastName, setUserLastName] = React.useState('');
   const [username, setUsername] = React.useState('');
@@ -86,6 +87,7 @@ const SignUp = () => {
     }
 
     setUserError('');
+    setIsLoading(true);
 
     try {
       await currentUserApi.signUp({
@@ -109,10 +111,12 @@ const SignUp = () => {
         setUserError('Something went wrong! Please, retry!');
       }
     }
+
+    setIsLoading(false);
   };
 
   return (
-    <SceneContainer>
+    <SceneContainer style={{marginTop: 20}}>
       <SceneTitle>
         {/* eslint-disable-line */}
         Sign Up
@@ -155,10 +159,10 @@ const SignUp = () => {
         onChangeText={setUserConfirmPassword}
         secureTextEntry
       />
-      <SignUpButton size={70} onPress={onButtonPress} centered>
+      <SignUpButton size={70} onPress={onButtonPress} disabled={isLoading} centered>
         <Text size={18} weight={700} color="white">
           {/* eslint-disable-line */}
-          Sign up now!
+          {!isLoading ? 'Sign up now!' : '...'}
         </Text>
       </SignUpButton>
       <Button to="/sign-in" centered>
