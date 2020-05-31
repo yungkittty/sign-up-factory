@@ -23,7 +23,7 @@
     "ios": {
       "supportsTablet": true
     },
-    "description": "SignUpFactory is an application where you can register and see the profile of other registered members.\n\nIt also allows you to enrich your profile with a photo to make other members jealous!",
+    "description": "SignUpFactory is an application where you can register and see the profile of other registered members.\n\nSignUpFactory also allows you to enrich your profile with a photo to make other members jealous!",
     "githubUrl": "https://github.com/yungkittty/sign-up-factory"
   }
 }
